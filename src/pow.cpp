@@ -97,11 +97,6 @@ unsigned int static DarkGravityWave_V1(const CBlockIndex* pindexLast, const Cons
     const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
     int64_t nPastBlocks = 12;
 	
-	// Diff drop to pow limit solution for 26 block's - we need this for new diff rules.
-    if ((pindexLast->nHeight+1 >= 1857852) && (pindexLast->nHeight+1 < 1857877)) {
-        return bnPowLimit.GetCompact();
-	}
-	
     // make sure we have at least (nPastBlocks + 1) blocks, otherwise just return powLimit
     if (!pindexLast || pindexLast->nHeight < nPastBlocks) {
         return bnPowLimit.GetCompact();
@@ -151,7 +146,12 @@ unsigned int static DarkGravityWave_V2(const CBlockIndex* pindexLast, const Cons
     /* current difficulty formula, dash - DarkGravity v3, written by Evan Duffield - evan@dash.org */
     const arith_uint256 bnPowLimit = UintToArith256(uint256S("0x00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
     int64_t nPastBlocks = 24;
-	
+
+	// Diff drop to pow limit solution for 26 block's - we need this for new diff rules.
+    if ((pindexLast->nHeight+1 >= 1857852) && (pindexLast->nHeight+1 < 1857877)) {
+        return bnPowLimit.GetCompact();
+	}
+
     // make sure we have at least (nPastBlocks + 1) blocks, otherwise just return powLimit
     if (!pindexLast || pindexLast->nHeight < nPastBlocks) {
         return bnPowLimit.GetCompact();
@@ -202,7 +202,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
  int DiffMode = 1; 
  if (pindexLast->nHeight+1 < 1550011)    { DiffMode = 1; }
  if (pindexLast->nHeight+1 >= 1550011)   { DiffMode = 2; }
- if (pindexLast->nHeight+1 >= 1857877)   { DiffMode = 3; }
+ if (pindexLast->nHeight+1 >= 1857852)   { DiffMode = 3; }
  if (DiffMode == 1) { return GetNextWorkRequired_Legacy(pindexLast, pblock, params); } // legacy litecoin diff
  if (DiffMode == 2) { return DarkGravityWave_V1(pindexLast, params); } // Old variant past block 12 and standart pow limit 00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
  if (DiffMode == 3) { return DarkGravityWave_V2(pindexLast, params); } // New varinant with less pow limit and past block 24 and pow limit 00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
