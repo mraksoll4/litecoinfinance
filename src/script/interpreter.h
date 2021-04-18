@@ -134,20 +134,24 @@ enum
     // Making OP_CODESEPARATOR and FindAndDelete fail any non-segwit scripts
     //
     SCRIPT_VERIFY_CONST_SCRIPTCODE = (1U << 16),
+	
+	// Allow NON_FORKID TX for old chain.
+	//
+    SCRIPT_ALLOW_NON_FORKID = (1U << 17),
 
     // Taproot/Tapscript validation (BIPs 341 & 342)
     //
-    SCRIPT_VERIFY_TAPROOT = (1U << 17),
+    SCRIPT_VERIFY_TAPROOT = (1U << 18),
 
     // Making unknown Taproot leaf versions non-standard
     //
-    SCRIPT_VERIFY_DISCOURAGE_UPGRADABLE_TAPROOT_VERSION = (1U << 18),
+    SCRIPT_VERIFY_DISCOURAGE_UPGRADABLE_TAPROOT_VERSION = (1U << 19),
 
     // Making unknown OP_SUCCESS non-standard
-    SCRIPT_VERIFY_DISCOURAGE_OP_SUCCESS = (1U << 19),
+    SCRIPT_VERIFY_DISCOURAGE_OP_SUCCESS = (1U << 20),
 
     // Making unknown public key versions (in BIP 342 scripts) non-standard
-    SCRIPT_VERIFY_DISCOURAGE_UPGRADABLE_PUBKEYTYPE = (1U << 20),
+    SCRIPT_VERIFY_DISCOURAGE_UPGRADABLE_PUBKEYTYPE = (1U << 21),
 };
 
 bool CheckSignatureEncoding(const std::vector<unsigned char> &vchSig, unsigned int flags, ScriptError* serror);
