@@ -15,7 +15,7 @@
 #include <span.h>
 #include "versionbits.h"
 
-extern "C" void yescrypt_hash(const char *input, char *output);
+extern "C" void yespower_hash(const char *input, char *output);
 
 uint256 CBlockHeader::GetHash() const
 {
@@ -32,7 +32,7 @@ uint256 CBlockHeader::GetPoWOldHash() const
 uint256 CBlockHeader::GetPoWNewHash() const
 {
     uint256 thash;
-    yescrypt_hash(BEGIN(nVersion), BEGIN(thash));
+    yespower_hash(BEGIN(nVersion), BEGIN(thash));
     return thash;
 }
 
