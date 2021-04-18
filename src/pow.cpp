@@ -144,12 +144,13 @@ unsigned int static DarkGravityWave_V1(const CBlockIndex* pindexLast, const Cons
 
 unsigned int static DarkGravityWave_V2(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params) {
     /* current difficulty formula, dash - DarkGravity v3, written by Evan Duffield - evan@dash.org */
-	const arith_uint256 bnPowLimit = PoWLimits;
+	
+	if (pindexLast->nHeight+1 >= 1857752){
+		{arith_uint256 bnPowLimit = UintToArith256(uint256S("0x00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
+    }
 	
 	if (pindexLast->nHeight+1 < 1857752){
-		return PowLimits = UintToArith256(uint256S("00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
-	} else {
-	    return PowLimits = UintToArith256(params.powLimit);
+	    arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
     }
 
     int64_t nPastBlocks = 24;
@@ -207,7 +208,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
  if (pindexLast->nHeight+1 >= 1857754)   { DiffMode = 3; }
  if (DiffMode == 1) { return GetNextWorkRequired_Legacy(pindexLast, pblock, params); } // legacy litecoin diff
  if (DiffMode == 2) { return DarkGravityWave_V1(pindexLast, params); } // Old variant past block 12 and standart pow limit 00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
- if (DiffMode == 3) { return DarkGravityWave_V2(pindexLast, params); } // New varinant with less pow limit and past block 24 .
+ if (DiffMode == 3) { return DarkGravityWave_V2(pindexLast, pblock, params); } // New varinant with less pow limit and past block 24 .
  return DarkGravityWave_V2(pindexLast, params);
 }
 
