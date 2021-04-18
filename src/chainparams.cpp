@@ -93,10 +93,10 @@ public:
         consensus.vDeployments[Consensus::DEPLOYMENT_TAPROOT].nTimeout = 1230767999; // December 31, 2008
 
         // The best chain should have at least this much work.
-        consensus.nMinimumChainWork = uint256S("0x00000000000000000000000000000000000000000000019a1f546180c6e75b9f");
+        consensus.nMinimumChainWork = uint256S("0x00");
 
         // By default assume that the signatures in ancestors of this block are valid.
-        consensus.defaultAssumeValid = uint256S("0x44d27133d1b36776f0d959598fb3909e97534d1e27b68275c51ba793642f2a52");
+        consensus.defaultAssumeValid = uint256S("0x00");
 
         /**
          * The message start string is designed to be unlikely to occur in normal data.
@@ -136,7 +136,7 @@ public:
         base58Prefixes[EXT_PUBLIC_KEY] = {0x04, 0x88, 0xB2, 0x1E};
         base58Prefixes[EXT_SECRET_KEY] = {0x04, 0x88, 0xAD, 0xE4};
 
-        bech32_hrp = "ltc";
+        bech32_hrp = "ltfn";
 
         vFixedSeeds = std::vector<SeedSpec6>(pnSeed6_main, pnSeed6_main + ARRAYLEN(pnSeed6_main));
 
@@ -170,9 +170,9 @@ public:
 
         chainTxData = ChainTxData{
             // Data from rpc: getchaintxstats 4096 
-            /* nTime    */ 1545793389,
-            /* nTxCount */ 30134447,
-            /* dTxRate  */ 0.06,
+            /* nTime    */ 0,
+            /* nTxCount */ 0,
+            /* dTxRate  */ 0,
         };
     }
 };
