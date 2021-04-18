@@ -146,11 +146,11 @@ unsigned int static DarkGravityWave_V2(const CBlockIndex* pindexLast, const CBlo
     /* current difficulty formula, dash - DarkGravity v3, written by Evan Duffield - evan@dash.org */
 	
 	if (pindexLast->nHeight+1 >= 1857752){
-		{arith_uint256 bnPowLimit = UintToArith256(uint256S("0x00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
+        arith_uint256 bnPowLimit = UintToArith256(uint256S("0x00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
     }
 	
 	if (pindexLast->nHeight+1 < 1857752){
-	    arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
+        arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
     }
 
     int64_t nPastBlocks = 24;
