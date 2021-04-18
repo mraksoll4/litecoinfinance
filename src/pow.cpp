@@ -98,8 +98,9 @@ unsigned int static DarkGravityWave_V1(const CBlockIndex* pindexLast, const Cons
     int64_t nPastBlocks = 12;
 	
 	// Diff drop to pow limit solution for 26 block's - we need this for new diff rules.
-    if ((pindexLast->nHeight+1 >= 1857852) && (pindexLast->nHeight+1 < 1857877))
+    if ((pindexLast->nHeight+1 >= 1857852) && (pindexLast->nHeight+1 < 1857877)) {
         return bnPowLimit.GetCompact();
+	}
 	
     // make sure we have at least (nPastBlocks + 1) blocks, otherwise just return powLimit
     if (!pindexLast || pindexLast->nHeight < nPastBlocks) {
