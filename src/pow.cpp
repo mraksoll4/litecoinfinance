@@ -19,6 +19,10 @@ unsigned int GetNextWorkRequired_Legacy(const CBlockIndex* pindexLast, const CBl
 	// Diff drop to pow limit solution for 10 block's
 	if ((pindexLast->nHeight+1 >= 1550000) && (pindexLast->nHeight+1 < 1550010))
         return nProofOfWorkLimit;
+	
+	// Diff drop to pow limit solution for 26 block's - we need this for new diff rules.
+    if ((pindexLast->nHeight+1 >= 1857852) && (pindexLast->nHeight+1 < 1857877))
+        return nProofOfWorkLimit;
 
     // Only change once per difficulty adjustment interval
     if ((pindexLast->nHeight+1) % params.DifficultyAdjustmentInterval() != 0)
@@ -147,11 +151,6 @@ unsigned int static DarkGravityWave_V2(const CBlockIndex* pindexLast, const Cons
     const arith_uint256 bnPowLimit = UintToArith256(uint256S("0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
     int64_t nPastBlocks = 24;
 
-	// Diff drop to pow limit solution for 26 block's - we need this for new diff rules.
-    if ((pindexLast->nHeight+1 >= 1857852) && (pindexLast->nHeight+1 < 1857877)) {
-        return bnPowLimit.GetCompact();
-	}
-
     // make sure we have at least (nPastBlocks + 1) blocks, otherwise just return powLimit
     if (!pindexLast || pindexLast->nHeight < nPastBlocks) {
         return bnPowLimit.GetCompact();
@@ -203,9 +202,11 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
  if (pindexLast->nHeight+1 < 1550011)    { DiffMode = 1; }
  if (pindexLast->nHeight+1 >= 1550011)   { DiffMode = 2; }
  if (pindexLast->nHeight+1 >= 1857852)   { DiffMode = 3; }
+ if (pindexLast->nHeight+1 >= 1857878)   { DiffMode = 4; }
  if (DiffMode == 1) { return GetNextWorkRequired_Legacy(pindexLast, pblock, params); } // legacy litecoin diff
  if (DiffMode == 2) { return DarkGravityWave_V1(pindexLast, params); } // Old variant past block 12 and standart pow limit 00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
- if (DiffMode == 3) { return DarkGravityWave_V2(pindexLast, params); } // New varinant with less pow limit and past block 24 and pow limit 00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ if (DiffMode == 3) { return GetNextWorkRequired_Legacy(pindexLast, pblock, params); } // We use it for drop diff , for new retarget rules
+ if (DiffMode == 4) { return DarkGravityWave_V2(pindexLast, params); } // New varinant with less pow limit and past block 24 and pow limit 00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
  return DarkGravityWave_V2(pindexLast, params);
 }
 
