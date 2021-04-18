@@ -144,7 +144,7 @@ unsigned int static DarkGravityWave_V1(const CBlockIndex* pindexLast, const Cons
 
 unsigned int static DarkGravityWave_V2(const CBlockIndex* pindexLast, const Consensus::Params& params) {
     /* current difficulty formula, dash - DarkGravity v3, written by Evan Duffield - evan@dash.org */
-    const arith_uint256 bnPowLimit = UintToArith256(uint256S("0x00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
+    const arith_uint256 bnPowLimit = UintToArith256(uint256S("0x7fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
     int64_t nPastBlocks = 24;
 
 	// Diff drop to pow limit solution for 26 block's - we need this for new diff rules.
