@@ -142,17 +142,9 @@ unsigned int static DarkGravityWave_V1(const CBlockIndex* pindexLast, const Cons
     return bnNew.GetCompact();
 }
 
-unsigned int static DarkGravityWave_V2(const CBlockIndex* pindexLast, const CBlockHeader *pblock, const Consensus::Params& params) {
+unsigned int static DarkGravityWave_V2(const CBlockIndex* pindexLast, const Consensus::Params& params) {
     /* current difficulty formula, dash - DarkGravity v3, written by Evan Duffield - evan@dash.org */
-	
-	if (pindexLast->nHeight+1 >= 1857752){
-        arith_uint256 bnPowLimit = UintToArith256(uint256S("0x00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
-    }
-	
-	if (pindexLast->nHeight+1 < 1857752){
-        arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
-    }
-
+    const arith_uint256 bnPowLimit = UintToArith256(uint256S("0x00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
     int64_t nPastBlocks = 24;
 	
     // make sure we have at least (nPastBlocks + 1) blocks, otherwise just return powLimit
@@ -208,7 +200,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
  if (pindexLast->nHeight+1 >= 1857754)   { DiffMode = 3; }
  if (DiffMode == 1) { return GetNextWorkRequired_Legacy(pindexLast, pblock, params); } // legacy litecoin diff
  if (DiffMode == 2) { return DarkGravityWave_V1(pindexLast, params); } // Old variant past block 12 and standart pow limit 00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
- if (DiffMode == 3) { return DarkGravityWave_V2(pindexLast, pblock, params); } // New varinant with less pow limit and past block 24 .
+ if (DiffMode == 3) { return DarkGravityWave_V2(pindexLast, params); } // New varinant with less pow limit and past block 24 .
  return DarkGravityWave_V2(pindexLast, params);
 }
 
