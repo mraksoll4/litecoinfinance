@@ -174,6 +174,13 @@ public:
             /* nTxCount */ 0,
             /* dTxRate  */ 0,
         };
+
+        consensus.powLimit = [](const CBlockIndex* pindexLast, const Consensus::Params& params);{
+            if (pindexLast->nHeight+1 >= 1857852)                 return uint256S("0fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"); // from previous mainnet
+            }
+            else
+                return uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+		};	
     }
 };
 
