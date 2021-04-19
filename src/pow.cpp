@@ -251,7 +251,7 @@ bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params&
  int DiffMode = 1; 
  if (pindexLast->nHeight+1 < 1857852)   { DiffMode = 1; }
  if (pindexLast->nHeight+1 >= 1857852)   { DiffMode = 2; }
- if (DiffMode == 1) { return CheckProofOfWork_Legacy(hash, nBits, params); }
- if (DiffMode == 2) { return CheckProofOfWork_V1(hash, nBits, params); }
- return CheckProofOfWork_V1(hash, nBits, params);
+ if (DiffMode == 1) { return CheckProofOfWork_Legacy((uint256 hash, nBits, params); }
+ if (DiffMode == 2) { return CheckProofOfWork_V1((uint256 hash, nBits, params); }
+ return CheckProofOfWork_V1((uint256 hash, nBits, params);
 }
