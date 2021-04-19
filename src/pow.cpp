@@ -156,10 +156,6 @@ unsigned int static DarkGravityWave_V2(const CBlockIndex* pindexLast, const Cons
 	if ((pindexLast->nHeight+1 >= 1857852) && (pindexLast->nHeight+1 < 1857878))
         return bnPowLimit.GetCompact();
 
-	// Diff drop to pow limit solution for 10 block's
-	if ((pindexLast->nHeight+1 >= 1857852) && (pindexLast->nHeight+1 < 185788))
-        return nProofOfWorkLimit;
-
     const CBlockIndex *pindex = pindexLast;
     arith_uint256 bnPastTargetAvg;
 
