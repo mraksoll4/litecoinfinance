@@ -76,7 +76,6 @@ public:
         consensus.SegwitHeight = 1201536; 
         consensus.MinBIP9WarningHeight = 1209600; // segwit activation height + miner confirmation window
         consensus.CPUHeight = 1550011; // hardfork start block
-        consensus.powLimit = uint256S("00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
         consensus.nPowTargetTimespan = 3.5 * 24 * 60 * 60; // two weeks
         consensus.nPowTargetSpacing = 2.5 * 60;
         consensus.fPowAllowMinDifficultyBlocks = false;
