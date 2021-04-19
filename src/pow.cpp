@@ -246,7 +246,7 @@ bool CheckProofOfWork_V1(uint256 hash, unsigned int nBits, const Consensus::Para
     return true;
 }
 
-bool CheckProofOfWork(const CBlockIndex* pindexLast, uint256 hash, unsigned int nBits, const Consensus::Params& params)
+bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params& params)
 {
  int DiffMode = 1; 
  if (pindexLast->nHeight+1 < 1857852)   { DiffMode = 1; }
