@@ -213,8 +213,8 @@ bool CheckProofOfWork(const CBlockIndex* pindexLast, uint256 hash, unsigned int 
  int DiffMode = 1; 
  if (pindexLast->nHeight+1 < 1857852)   { DiffMode = 1; }
  if (pindexLast->nHeight+1 >= 1857852)   { DiffMode = 2; }
- if (DiffMode == 1) { return CheckProofOfWork_Legacy(hash, nBits, params); } // New varinant with less pow limit and past block 24 and pow limit 00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
- if (DiffMode == 2) { return CheckProofOfWork_V1(hash, nBits, params); } // New varinant with less pow limit and past block 24 and pow limit 00ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+ if (DiffMode == 1) { return CheckProofOfWork_Legacy(hash, nBits, params); }
+ if (DiffMode == 2) { return CheckProofOfWork_V1(hash, nBits, params); }
  return CheckProofOfWork_V1(hash, nBits, params);
 }
 
