@@ -208,7 +208,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
  return DarkGravityWave_V2(pindexLast, params);
 }
 
-bool CheckProofOfWork_Legacy(uint256 hash, unsigned int nBits, const Consensus::Params& params)
+bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params& params)
 {
     bool fNegative;
     bool fOverflow;
@@ -227,7 +227,7 @@ bool CheckProofOfWork_Legacy(uint256 hash, unsigned int nBits, const Consensus::
     return true;
 }
 
-bool CheckProofOfWork_V1(uint256 hash, unsigned int nBits, const Consensus::Params& params)
+bool CheckProofOfWorkV2(uint256 hash, unsigned int nBits, const Consensus::Params& params)
 {
     bool fNegative;
     bool fOverflow;
@@ -244,14 +244,4 @@ bool CheckProofOfWork_V1(uint256 hash, unsigned int nBits, const Consensus::Para
         return false;
 
     return true;
-}
-
-bool CheckProofOfWork(uint256 hash, unsigned int nBits, const Consensus::Params& params, const CBlockIndex* pindexLast)
-{
- int DiffMode = 1; 
- if (pindexLast->nHeight+1 < 1857852)   { DiffMode = 1; }
- if (pindexLast->nHeight+1 >= 1857852)   { DiffMode = 2; }
- if (DiffMode == 1) { return CheckProofOfWork_Legacy((uint256 hash, nBits, params); }
- if (DiffMode == 2) { return CheckProofOfWork_V1((uint256 hash, nBits, params); }
- return CheckProofOfWork_V1((uint256 hash, nBits, params);
 }
