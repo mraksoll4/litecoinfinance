@@ -144,17 +144,13 @@ unsigned int static DarkGravityWave_V1(const CBlockIndex* pindexLast, const Cons
 
 unsigned int static DarkGravityWave_V2(const CBlockIndex* pindexLast, const Consensus::Params& params) {
     /* current difficulty formula, dash - DarkGravity v3, written by Evan Duffield - evan@dash.org */
-    const arith_uint256 bnPowLimit = UintToArith256(uint256S("3fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
+    const arith_uint256 bnPowLimit = UintToArith256(params.powLimit);
     int64_t nPastBlocks = 24;
 
     // make sure we have at least (nPastBlocks + 1) blocks, otherwise just return powLimit
     if (!pindexLast || pindexLast->nHeight < nPastBlocks) {
         return bnPowLimit.GetCompact();
     }
-
-	// Diff drop to pow limit solution for 26 block's - we need this for new diff rules.
-    if ((pindexLast->nHeight+1 >= 1857852) && (pindexLast->nHeight+1 < 1857877))
-        return bnPowLimit.GetCompact();
 
     const CBlockIndex *pindex = pindexLast;
     arith_uint256 bnPastTargetAvg;
