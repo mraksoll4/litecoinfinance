@@ -3,7 +3,7 @@
 
 static const yespower_params_t v1 = {YESPOWER_0_5, 4096, 32, "WaviBanana", 10};
 
-static const yespower_params_t v2 = {YESPOWER_1_0, 2048, 8, NULL, 0};
+static const yespower_params_t v2 = {YESPOWER_1_0, 4096, 16, NULL, 0};
 
 int yespower_hash(const char *input, char *output)
 {
