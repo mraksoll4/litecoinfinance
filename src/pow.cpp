@@ -144,7 +144,7 @@ unsigned int static DarkGravityWave_V1(const CBlockIndex* pindexLast, const Cons
 
 unsigned int static DarkGravityWave_V2(const CBlockIndex* pindexLast, const Consensus::Params& params) {
     /* current difficulty formula, dash - DarkGravity v3, written by Evan Duffield - evan@dash.org */
-    const arith_uint256 bnPowLimit = UintToArith256(uint256S("0fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
+    const arith_uint256 bnPowLimit = UintToArith256(uint256S("0x0fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"));
     int64_t nPastBlocks = 24;
 
     // make sure we have at least (nPastBlocks + 1) blocks, otherwise just return powLimit
@@ -236,7 +236,7 @@ bool CheckProofOfWorkV2(uint256 hash, unsigned int nBits, const Consensus::Param
     bnTarget.SetCompact(nBits, &fNegative, &fOverflow);
 
     // Check range
-    if (fNegative || bnTarget == 0 || fOverflow || bnTarget > UintToArith256(uint256S("0fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")))
+    if (fNegative || bnTarget == 0 || fOverflow || bnTarget > UintToArith256(uint256S("0x0fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff")))
         return false;
 
     // Check proof of work matches claimed amount
