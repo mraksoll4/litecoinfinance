@@ -1262,11 +1262,11 @@ CAmount GetBlockSubsidy(int nHeight, const Consensus::Params& consensusParams)
               {
               nSubsidy = 2000050 * COIN;
               }
-		      else if ((nHeight >= 1858038) && (nHeight < 1858058))
+              else if ((nHeight >= 1858801) && (nHeight < 1858822))
               {
               nSubsidy = 2000200 * COIN; // For refunds old users from coinexhange and restore coins dead hard drive. nSubsidy 3 stage of halving /2 = /2 = x
               }
-		      else if (nHeight >= 1858058)
+              else if (nHeight >= 1858822)
               {
               nSubsidy = 200 * COIN; //200 /2 =100 /2 = 50 coins , 3 stage of halving.
               }
