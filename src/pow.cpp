@@ -153,7 +153,7 @@ unsigned int static DarkGravityWave_V2(const CBlockIndex* pindexLast, const Cons
     }
 
 	// Diff drop to pow limit solution for 10 block's
-	if ((pindexLast->nHeight+1 >= 1858801) && (pindexLast->nHeight+1 < 1858827))
+	if ((pindexLast->nHeight+1 >= 1857852) && (pindexLast->nHeight+1 < 1857878))
         return bnPowLimit.GetCompact();
 
     const CBlockIndex *pindex = pindexLast;
@@ -201,7 +201,7 @@ unsigned int GetNextWorkRequired(const CBlockIndex* pindexLast, const CBlockHead
  int DiffMode = 1; 
  if (pindexLast->nHeight+1 < 1550011)    { DiffMode = 1; }
  if (pindexLast->nHeight+1 >= 1550011)   { DiffMode = 2; }
- if (pindexLast->nHeight+1 >= 1858801)   { DiffMode = 3; }
+ if (pindexLast->nHeight+1 >= 1857852)   { DiffMode = 3; }
  if (DiffMode == 1) { return GetNextWorkRequired_Legacy(pindexLast, pblock, params); } // legacy litecoin diff
  if (DiffMode == 2) { return DarkGravityWave_V1(pindexLast, params); } // Old variant past block 12 and standart pow limit 00000fffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
  if (DiffMode == 3) { return DarkGravityWave_V2(pindexLast, params); } // New varinant with past block 24
